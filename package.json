@@ -1,0 +1,19 @@
+{
+  "name": "assistantbek-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ljdb": "^1.0.4",
+    "node-schedule-tz": "^1.2.1-4",
+    "telegraf": "^4.16.3"
+  }
+}
