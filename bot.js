@@ -57,7 +57,9 @@ bot.command("add", async (ctx) => {
 
   const args = ctx.message.text.split(" ");
   if (args.length !== 2) {
-    return await ctx.reply("Foydalanish: /add <chat_id>\nMasalan: /add -123456789");
+    return await ctx.reply(
+      "Foydalanish: /add <chat_id>\nMasalan: /add -123456789"
+    );
   }
 
   const chatIdStr = args[1];
@@ -95,6 +97,15 @@ bot.on("my_chat_member", (ctx) => {
     adminId,
     `Old: ${old_chat_member.status}.\nNew: ${new_chat_member.status}.\nChat:  ${chat.id}`
   );
+});
+
+bot.middleware((ctx, next) => {
+  const chatType = ctx.chat?.type;
+  if (chatType == "private") {
+    return next();
+  }
+
+  return;
 });
 
 bot.start((ctx) => {
