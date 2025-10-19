@@ -27,12 +27,14 @@ const setScheduleForGroup = (chatId) => {
     },
     async () => {
       try {
-        await bot.telegram.sendPoll(
+        const sent = await bot.telegram.sendPoll(
           chatId,
           "Ertaga abed etasizmi?",
           ["Ha", "Yo'q"],
           { is_anonymous: false }
         );
+
+        await bot.telegram.pinChatMessage(chatId, sent.message_id);
       } catch (err) {
         const adminId = process.env.ADMIN_ID || 5751130518;
         bot.telegram.sendMessage(adminId, `Error:\n${err.message}`);
@@ -77,7 +79,7 @@ bot.command("add", async (ctx) => {
   setScheduleForGroup(chatId);
 
   groups.push(chatId);
-  data.data.push(chatIdStr);
+  data.data.push(chatId);
   data.save();
   await ctx.reply("Guruh muvaffaqiyatli qo'shildi.");
 });
