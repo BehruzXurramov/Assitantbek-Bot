@@ -99,13 +99,9 @@ bot.on("my_chat_member", (ctx) => {
   );
 });
 
-bot.middleware((ctx, next) => {
-  const chatType = ctx.chat?.type;
-  if (chatType == "private") {
-    return next();
-  }
-
-  return;
+bot.use((ctx, next) => {
+  if (ctx.chat?.type !== "private") return;
+  return next();
 });
 
 bot.start((ctx) => {
